@@ -64,12 +64,12 @@ module Solutions =
 
     let sol6 (a:array<int>) i j =
         if i < 0 || j < 0 || i >= a.Length || j >= a.Length then
-            printf "Your indices are out of range, array can't be changed%A"
+            printf "Your indices are out of range, array can't be changed"
             a
         else
             a.[i] <- a.[i] + a.[j]
             a.[j] <- a.[j] - a.[i]
             a.[i] <- a.[i] + a.[j]
             a.[j] <- -1 * a.[j]
-            printf "Array was successfully changed%A"
+            printf "Array was successfully changed"
             a
