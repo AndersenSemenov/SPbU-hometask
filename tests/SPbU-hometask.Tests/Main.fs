@@ -1,6 +1,9 @@
-module ExpectoTemplate
+namespace SPbU_hometask
 
-open Expecto
 
-[<EntryPoint>]
-let main argv = Tests.runTestsInAssembly defaultConfig argv
+module ExpectoTemplate =
+    open Expecto
+    open Tests
+    
+    [<EntryPoint>]
+    let main argv = Tests.runTestsInAssembly defaultConfig argv
