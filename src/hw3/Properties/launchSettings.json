@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SPbU-hometask": {
+      "commandName": "Project",
+      "commandLineArgs": "--task5 11"
+    }
+  }
+}

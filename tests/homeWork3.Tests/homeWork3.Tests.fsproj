@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GenerateProgramFile>false</GenerateProgramFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Sample.fs" />
+    <Compile Include="Main.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="altcover" Version="7.1.782" />
+    <PackageReference Include="Expecto" Version="8.13.1" />
+    <PackageReference Include="Expecto.FsCheck" Version="8.13.1" />
+    <PackageReference Include="FsCheck" Version="2.14.0" />
+    <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.8.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
+    <ProjectReference Include="..\..\src\hw3\hw3.fsproj" />
+    <ProjectReference Include="..\SPbU-hometask.Tests\SPbU-hometask.Tests.fsproj" />
+    <PackageReference Update="FSharp.Core" Version="4.6.0" />
+  </ItemGroup>
+</Project>

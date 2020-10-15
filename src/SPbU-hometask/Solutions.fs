@@ -73,3 +73,4 @@ module Solutions =
             a.[j] <- -1 * a.[j]
             printf "Array was successfully changed"
             a
+
