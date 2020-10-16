@@ -4,6 +4,33 @@ open SPbU_hometask.Solutions
 open Expecto
 
 [<Tests>]
+let testsForBuildingMatrixOne =
+  testList "testing function buildingMatrixOne" [
+    testCase "function arg 0" <| fun _ ->
+        Expect.equal (buildingMatrixOne 0) (array2D []) "Wrong, for arg 0 expected answer is []"
+    testCase "function arg 2" <| fun _ ->
+        Expect.equal (buildingMatrixOne 2) (array2D [ [1; 0]; [0; 1] ]) "Wrong, for arg 0 expected answer is [ [1; 0]; [0; 1] ]"
+  ]
+
+[<Tests>]
+let testsForMatrixMultiply =
+  testList "testing function matrixMultiply" [
+    testCase "test1" <| fun _ ->
+        Expect.equal (matrixMultiply (array2D []) (array2D[])) (array2D []) "Wrong, expected answer is []"
+    testCase "test2" <| fun _ ->
+        Expect.equal (matrixMultiply (array2D [ [0; 1; 0]; [1; 0; 1] ]) (array2D [ [2; 2]; [1; 0]; [0; 3] ])) (array2D [ [1; 0]; [2; 5] ]) "Wrong, expected answer is [ [1; 0]; [2; 5]"
+  ]
+
+[<Tests>]
+let testsForBinPow =
+  testList "testing function binPow" [
+    testCase "test1" <| fun _ ->
+        Expect.equal (binPow (array2D [ [1; 1]; [2; 2] ]) 0) (array2D [ [1; 0]; [0; 1] ]) "Wrong, expected answer is [ [1; 0]; [0; 1] ]"
+    testCase "test2" <| fun _ ->
+        Expect.equal (binPow (array2D [ [1; 2]; [3; 2;] ]) 2) (array2D [ [7; 6]; [9; 10] ]) "Wrong, expected answer is [ [7; 6]; [9; 10] ]"
+  ]
+
+[<Tests>]
 let test1 =
   testList "testing Fib1" [
     testCase "function arg 0" <| fun _ ->
