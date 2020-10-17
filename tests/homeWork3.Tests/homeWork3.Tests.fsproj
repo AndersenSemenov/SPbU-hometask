@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="altcover" Version="7.1.782" />
     <PackageReference Include="Expecto" Version="8.13.1" />
     <PackageReference Include="Expecto.FsCheck" Version="8.13.1" />
     <PackageReference Include="FsCheck" Version="2.14.0" />

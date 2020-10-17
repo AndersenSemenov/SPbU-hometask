@@ -222,6 +222,13 @@ for (i = 0, l = charts.length; i < l; i++) {
 
 var assemblies = [
   {
+    "name": "hw3",
+    "classes": [
+      { "name": "SPbU_hometask.Main", "rp": "hw3_Main.htm", "cl": 0, "ucl": 37, "cal": 37, "tl": 60, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 20, "lch": [], "bch": [], "hc": [] },
+      { "name": "SPbU_hometask.Solutions", "rp": "hw3_Solutions.htm", "cl": 76, "ucl": 0, "cal": 76, "tl": 115, "ct": "LineCoverage", "mc": "-", "cb": 55, "tb": 67, "lch": [], "bch": [], "hc": [] },
+      { "name": "System.AssemblyVersionInformation", "rp": "hw3_AssemblyVersionInformation.htm", "cl": 0, "ucl": 0, "cal": 0, "tl": 0, "ct": "MethodCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+    ]},
+  {
     "name": "SPbU-hometask",
     "classes": [
       { "name": "SPbU_hometask.Main", "rp": "SPbU_hometask_Main.htm", "cl": 0, "ucl": 40, "cal": 40, "tl": 63, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 20, "lch": [], "bch": [], "hc": [] },
@@ -233,9 +240,40 @@ var assemblies = [
 var historicCoverageExecutionTimes = [];
 
 var riskHotspotMetrics = [
+      { "name": "Cyclomatic complexity", "explanationUrl": "https://en.wikipedia.org/wiki/Cyclomatic_complexity" },
+      { "name": "NPath complexity", "explanationUrl": "https://modess.io/npath-complexity-cyclomatic-complexity-explained" },
+      { "name": "Crap Score", "explanationUrl": "https://googletesting.blogspot.de/2011/02/this-code-is-crap.html" },
 ];
 
 var riskHotspots = [
+  {
+    "assembly": "hw3", "class": "SPbU_hometask.Main", "reportPath": "hw3_Main.htm", "methodName": "System.Int32 SPbU_hometask.Main::main(System.String[])", "methodShortName": "main(...)", "fileIndex": 0, "line": 30,
+    "metrics": [
+      { "value": 8, "exceeded": false },
+      { "value": 128, "exceeded": false },
+      { "value": 72, "exceeded": true },
+    ]},
+  {
+    "assembly": "SPbU-hometask", "class": "SPbU_hometask.Main", "reportPath": "SPbU_hometask_Main.htm", "methodName": "System.Int32 SPbU_hometask.Main::main(System.String[])", "methodShortName": "main(...)", "fileIndex": 0, "line": 30,
+    "metrics": [
+      { "value": 8, "exceeded": false },
+      { "value": 128, "exceeded": false },
+      { "value": 72, "exceeded": true },
+    ]},
+  {
+    "assembly": "hw3", "class": "SPbU_hometask.Main", "reportPath": "hw3_Main.htm", "methodName": "System.String SPbU_hometask.Main/CLIArguments::Argu-IArgParserTemplate-get_Usage()", "methodShortName": "Argu-IArgParserTemplate-get_Usage()", "fileIndex": 0, "line": 19,
+    "metrics": [
+      { "value": 6, "exceeded": false },
+      { "value": 6, "exceeded": false },
+      { "value": 42, "exceeded": true },
+    ]},
+  {
+    "assembly": "SPbU-hometask", "class": "SPbU_hometask.Main", "reportPath": "SPbU_hometask_Main.htm", "methodName": "System.String SPbU_hometask.Main/CLIArguments::Argu-IArgParserTemplate-get_Usage()", "methodShortName": "Argu-IArgParserTemplate-get_Usage()", "fileIndex": 0, "line": 19,
+    "metrics": [
+      { "value": 6, "exceeded": false },
+      { "value": 6, "exceeded": false },
+      { "value": 42, "exceeded": true },
+    ]},
 ];
 
 var branchCoverageAvailable = true;
