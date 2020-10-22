@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Homework3": {
+      "commandName": "Project",
+      "commandLineArgs": "--task5 6"
+    }
+  }
+}
