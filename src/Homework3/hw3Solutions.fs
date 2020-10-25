@@ -13,8 +13,7 @@ module hw3Solutions =
         let m1 = Array2D.length2 matrix1
         let m2 = Array2D.length1 matrix2
         let k = Array2D.length2 matrix2
-        if m1 <> m2
-        then failwith "Matrices can't be multiplied, size mistake"
+        if m1 <> m2 then failwith "Matrices can't be multiplied, size mistake"
 
         let result = Array2D.zeroCreate n k
         for i = 0 to n - 1 do
@@ -25,18 +24,16 @@ module hw3Solutions =
 
     let rec binPow matrix n =
         if n = 0 then buildingMatrixOne 2
+        elif n % 2 = 0
+        then
+            let temp = binPow matrix (n / 2)
+            matrixMultiply temp temp
         else
-            if n % 2 = 0
-            then
-                let temp = binPow matrix (n / 2)
-                matrixMultiply temp temp
-            else
-                let temp = binPow matrix (n - 1)
-                matrixMultiply temp matrix        
+            let temp = binPow matrix (n - 1)
+            matrixMultiply temp matrix        
 
     let rec fib1 n =
-        if n < 0 
-        then failwith "Mistake, N must be positive" 
+        if n < 0 then failwith "Mistake, N must be positive" 
 
         match n with
         | 0 -> 0
@@ -44,8 +41,7 @@ module hw3Solutions =
         | n -> fib1(n - 1) + fib1(n - 2)
 
     let fib2 n =
-        if n < 0 
-        then failwith "Mistake, N must be positive"
+        if n < 0 then failwith "Mistake, N must be positive"
 
         let mutable cnt1 = 0
         let mutable cnt2 = 1
@@ -65,15 +61,13 @@ module hw3Solutions =
             then acc2
             else _go (n - 1) (acc2) (acc1 + acc2)
 
-        if n < 0 
-        then failwith "Mistake, N must be positive"
+        if n < 0 then failwith "Mistake, N must be positive"
         elif n = 0
         then 0
         else _go n 0 1 
 
     let fib4 n =
-        if n < 0
-        then failwith "Mistake, N must be positive"
+        if n < 0 then failwith "Mistake, N must be positive"
 
         if n = 0 then 0
         elif n = 1 then 1
@@ -85,8 +79,7 @@ module hw3Solutions =
             matrix.[0, 1]
 
     let fib5 n =
-        if n < 0
-        then failwith "Mistake, N must be positive"
+        if n < 0 then failwith "Mistake, N must be positive"
 
         if n = 0 then 0
         else
@@ -95,8 +88,7 @@ module hw3Solutions =
             result.[0, 1]          
 
     let fib6 n =
-        if n < 0 
-        then failwith "Mistake, N must be positive"
+        if n < 0 then failwith "Mistake, N must be positive"
 
         let ans = Array.zeroCreate (n + 1)
         if n = 0 
