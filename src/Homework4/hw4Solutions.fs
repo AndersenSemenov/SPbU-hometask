@@ -15,13 +15,13 @@ let readList filePath =
 let write filePath output =
     File.WriteAllText (filePath, output)
     
-let writeArray filePath (array:array<int>) =
+let writeArray filePath (arr:array<int>) =
     let mutable stringOfArray = ""
-    for i = 0 to array.Length - 1 do 
-        stringOfArray <- stringOfArray + string array.[i] + "\n"
+    for i = 0 to arr.Length - 1 do 
+        stringOfArray <- stringOfArray + string arr.[i] + "\n"
     write filePath stringOfArray
 
-let writeList filepath (lst: list<int>) =
+let writeList filepath (lst:list<int>) =
     writeArray filepath (List.toArray lst)
 
 let bubbleSortArray (arr:array<int>) =
@@ -69,8 +69,8 @@ let rec quickSortArray (arr:array<int>) =
     if arr.Length > 0 then _go (0, arr.Length - 1)
     arr
 
-let quickSortList (lst: list<int>) =
-    let rec _go (lst: list<int>) =
+let quickSortList (lst:list<int>) =
+    let rec _go lst =
         match lst with
         | pivot :: tail ->
             let left, right = List.partition (fun x -> x < pivot) tail
@@ -89,7 +89,7 @@ let int16ToInt32 (a:int16) (b:int16) =
     if b >= int16 0 then (int32 a <<< 16) + int32 b
     else (int32 (a + int16 1) <<< 16) + int32 b
 
-let int32ToInt16 (x: int32) =
+let int32ToInt16 (x:int32) =
     int16 (x >>> 16), int16 x
 
 let int16ToInt64 (a:int16) (b:int16) (c:int16) (d:int16)=
