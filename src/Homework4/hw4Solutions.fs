@@ -38,7 +38,8 @@ let bubbleSortList (lst:list<int>) =
     let rec _go lst =
         match lst with
         | firstHead :: secondHead :: tail ->
-            if firstHead > secondHead then
+            if firstHead > secondHead
+            then
                 secondHead :: _go (firstHead :: tail)
             else
                 firstHead :: _go (secondHead :: tail)
@@ -92,7 +93,7 @@ let int16ToInt32 (a:int16) (b:int16) =
 let int32ToInt16 (x:int32) =
     int16 (x >>> 16), int16 x
 
-let int16ToInt64 (a:int16) (b:int16) (c:int16) (d:int16)=
+let int16ToInt64 (a:int16) (b:int16) (c:int16) (d:int16) =
     let resab = int16ToInt32 a b
     let rescd = int16ToInt32 c d
     int32ToInt64 resab rescd
