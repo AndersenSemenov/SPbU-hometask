@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Program.fs" />
+    <Compile Include="hw6Solutions.fs" />
+    <Compile Include="Main.fs" />
   </ItemGroup>
 
 </Project>
