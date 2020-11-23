@@ -13,13 +13,17 @@ type Coordinates =
 
 [<Struct>]
 type Matrix =
-    val N: int
-    val M: int
-    val list: list<Coordinates>
-    new(n, m, lst) = { N = n; M = m; list = lst }
+    val numberOfStr: int
+    val numberOfCol: int
+    val listOfOnesCoordinates: list<Coordinates>
+    new(n, m, lst) = { numberOfStr = n; numberOfCol = m; listOfOnesCoordinates = lst }
 
 let readMatrix filePath =
     let lines = File.ReadAllLines filePath
+    let n = lines.Length
+    let m = lines.[0].Length
+    for str in lines do
+        if str.Length <> m then failwith "Incorrect format of matrix"
     let res =
         [ let mutable i = 0
           for str in lines do
@@ -28,22 +32,30 @@ let readMatrix filePath =
                   if ch = '1' then new Coordinates(i * 1<_strMatrix>, j * 1<_columnMatrix>)
                   j <- j + 1
               i <- i + 1 ]
-    let n = lines.Length
-    let m = lines.[0].Length
     new Matrix(n, m, res)
 
 let matrixMultiply (matrix1: Matrix) (matrix2: Matrix) =
-    if matrix1.M <> matrix2.N then failwith "Wrong sizes, matrix can't be multiplied"
+    if matrix1.numberOfCol <> matrix2.numberOfStr then failwith "Wrong sizes, matrix can't be multiplied"
     let lst =
-        [ for k in matrix1.list do
-            for h in matrix2.list do
-                if int (k.J) = int (h.I) then new Coordinates(k.I, h.J) ]
-    new Matrix(matrix1.N, matrix2.M, lst)
+        [ for k in matrix1.listOfOnesCoordinates do
+            for h in matrix2.listOfOnesCoordinates do
+                if int k.J = int h.I then new Coordinates(k.I, h.J) ]
+    new Matrix(matrix1.numberOfStr, matrix2.numberOfCol, lst |> List.distinct)
 
 let listToArrayOfString (matrix: Matrix) =
-    let gen = [| for _ in 1 .. matrix.N -> Array.replicate matrix.M '0' |]
-    for elem in matrix.list do
+    let charMatrix = [| for _ in 1 .. matrix.numberOfStr -> Array.replicate matrix.numberOfCol '0' |]
+    for elem in matrix.listOfOnesCoordinates do
         let i = int (elem.I)
         let j = int (elem.J)
-        gen.[i].[j] <- '1'
-    Array.map (fun (ca: char []) -> new string(ca)) gen
+        charMatrix.[i].[j] <- '1'
+    Array.map (fun (ca: char []) -> new string(ca)) charMatrix
+
+
+let countMatrix inputFilePath1 inputFilePath2 =
+    let matrix1 = readMatrix inputFilePath1
+    let matrix2 = readMatrix inputFilePath2
+    let res = listToArrayOfString (matrixMultiply matrix1 matrix2)
+    res
+
+let writeMatrix matrix outputFilePath = 
+    System.IO.File.WriteAllLines ((outputFilePath), matrix)
