@@ -6,27 +6,14 @@ type MyTree<'tValue> =
     | Leaf of 'tValue
     | Node of 'tValue * MyList<MyTree<'tValue>>
 
-let getMax tree =
-    let rec _go acc (tree: MyTree<int>) =
-        match tree with
-        | Leaf value -> max acc value
-        | Node (value, tail) ->
-            let funcForSubtrees =
-                fun innerAcc subTree ->
-                    subTree |> _go (max innerAcc acc)
-            tail |> fold funcForSubtrees value
-    tree |> _go 0
+let rec _go acc func (tree: MyTree<int>) =
+    match tree with
+    | Leaf x -> func acc x
+    | Node (x, tail) -> fold (fun acc1 subTree -> _go acc1 func subTree) (func acc x) tail
 
-let getAverage tree =
-    let rec _go (mainAcc: int * int) (tree: MyTree<int>) =
-        let sum, quantity = mainAcc
-        match tree with
-        | Leaf x -> (sum + x), (quantity+1)
-        | Node (x, tail) ->
-            let func =
-                fun innerAcc subTree ->
-                    let currSum, currQuantity = innerAcc
-                    subTree |> _go (currSum, currQuantity)
-            tail |> fold func ((sum+x), (quantity+1))
-    let s, q = _go (0, 0) tree
+let getMax tree =
+    _go System.Int32.MinValue (fun x y -> (max x y)) tree
+
+let getAverage tree =  
+    let s, q = _go (0, 0) (fun (sum, quantity) x -> (sum+x), (quantity+1)) tree
     (s |> float) / (q |> float)
