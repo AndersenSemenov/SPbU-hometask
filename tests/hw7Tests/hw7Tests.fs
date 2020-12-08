@@ -19,20 +19,34 @@ let testsPropsForLists =
         testProperty "Comparing results of Map method" <| fun (lst:list<int>) ->
             if List.length lst <> 0
             then
-                let a = List.map (fun x -> x + 1) lst |> toMyList
-                let b = lst |> toMyList |> map (fun x -> x + 1)
+                let func = (fun x -> x + 1)
+                let a = List.map func lst |> toMyList
+                let b = lst |> toMyList |> map func
                 Expect.equal a b "My Map has to work as system"
-        testProperty "Comparing results of Fold method" <| fun (lst:list<int>) ->
+        testProperty "Comparing results of Fold method #1" <| fun (lst:list<int>) ->
             if List.length lst <> 0
             then
-                let a = List.fold (fun x y -> x - y) 1 lst
-                let b = lst |> toMyList |> fold (fun x y -> x - y) 1
+                let func = (fun x y -> x - y)
+                let a = List.fold func 0 lst
+                let b = lst |> toMyList |> fold func 0
+                Expect.equal a b "My Fold has to work as system"
+        testProperty "Comparing results of Fold method #2" <| fun (lst:list<int>) ->
+            let list = List.filter (fun x -> x <> 0) lst
+            if List.length list <> 0
+            then     
+                let func = (fun x y -> x / y)
+                let a = List.fold func (List.head list) (List.tail list)
+                let mylist = list |> toMyList 
+                let b =
+                    match mylist with
+                    | Cons(head, tail) ->
+                        fold func head tail
+                    | Singleton x -> x
                 Expect.equal a b "My Fold has to work as system"
         testProperty "Comparing results of Concat method" <| fun (lst1:list<int>, lst2:list<int>)->
             if List.length lst1 <> 0 && List.length lst2 <> 0
             then
-                let h = [lst1; lst2] |> Seq.ofList
-                let a = h |> List.concat |> toMyList
+                let a = (lst1@lst2) |> toMyList
                 let b = MyList.concat (lst1 |> toMyList) (lst2 |> toMyList)
                 Expect.equal a b "My Concat has to work as system"
         testProperty "Comparing results of Iter method" <| fun (lst:list<int>) ->
@@ -40,14 +54,13 @@ let testsPropsForLists =
             then
                 let arr1 = Array.zeroCreate (List.length lst)
                 let arr2 = Array.zeroCreate (List.length lst)
-                let mutable i = 0
-                List.iter(fun x ->
-                    arr1.[i] <- x*10
-                    i <- i + 1) lst
-                i <- 0
-                iter (fun x ->
-                    arr2.[i] <- x*10
-                    i <- i + 1) (lst |> toMyList)
+                let func (arr:int[]) =
+                    let mutable i = 0
+                    (fun x ->
+                    arr.[i] <- x*10
+                    i <- i + 1)
+                List.iter (func arr1) lst
+                iter (func arr2) (lst |> toMyList)
                 Expect.equal arr1 arr2 "My Iter has to work as system"
     ]
 
